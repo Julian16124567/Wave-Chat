@@ -5,11 +5,14 @@
 using std::string;
 
 //initialise windwow
-void Windowinit() {
+void WindowInit(Tui& t) {
     initscr();
     cbreak();
     noecho();
+    curs_set(0);
     keypad(stdscr, TRUE);
+    WINDOW *winone = newwin(t.yMax / 2, t.yMax / 2, 1, 1);
+    box(t.winone, 0 , 0);
 }
 
 //set color/colorpairs
@@ -18,6 +21,7 @@ void ColorMain() {
         std::cerr << "[*] Terminal does not support colors!" << std::endl;
         endwin();  
     } else {
+        std::cout << "[*] Colors initialized." << std::endl;
         start_color();
         init_pair(1, COLOR_WHITE, COLOR_BLACK);
         init_pair(2, COLOR_WHITE, COLOR_CYAN);
@@ -26,15 +30,24 @@ void ColorMain() {
     }
 }
 
+
 //get terminal height/width
-void getMaxy(Tui& t) {
-    getmaxyx(stdscr, t.yMax, t.yMax);
+void getMaxy(Tui& t, int inp, WINDOW* winone) {
+    if (inp == 1) {
+        getmaxyx(stdscr, t.yMax, t.xMax);
+    } else if (inp == 2) {
+        getmaxyx(winone, t.yMaxone, t.xMaxone);
+    }
 }
 
-//draw main window
-void drawMain(Tui& t) {
-    WINDOW *winone = newwin(t.yMax / 2, t.yMax / 2, 1, 1);
-    box(winone, 0 , 0);
+//draw main window/winone
+void drawWinone(Tui& t) {
+    getMaxy(t, 2, t.winone);
 
 }
 
+
+//make windowone
+void makeWin(Tui& t,string winname, int a, int b, int c, int d) {
+    WINDOW *winname = newwin(a, b, c, d);
+}
