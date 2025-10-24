@@ -11,12 +11,21 @@
 #include "../../include/tui/tui.hpp"
 using std::string;
 
+void connecPtoP(Client& c) {
+    c.buildSocket(c);
+    
+}
+
+void connectServer(Client& c) {
+
+}
+
 int main() {
     
     //connecting client with server
     Client c;
-    c.buildSocketServer(c);
     
+
 
 
     //initialising start window

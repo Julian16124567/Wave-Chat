@@ -35,7 +35,9 @@ void buildSocketServer(Client& c) {
 }
 
 //send data to server
-void sendToServer(Client& c) {
+//string messge is attribute for message
+void sendToServer(Client& c, string message) {
+    c.data = message;
     ssize_t bytesSent = send(c.sock, c.data.c_str(), c.data.length(), 0);
     if (bytesSent < 0) {
         throw std::runtime_error("[*] Failed to send data to server!");
