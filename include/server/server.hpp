@@ -8,15 +8,15 @@
 using std::string;
 
 struct Server {
-    int sock;
-    int clientSock;
-    sockaddr_in address;
+    int sock = -1;
+    int clientSock = -1;
+    sockaddr_in address{};
     unsigned short port = 9090;
     bool running = false;
 
-    bool buildSocket(Server& s);
-    bool acceptClient(Server& s);
-    void handleClient(Server& s);
+    bool buildSocket();
+    bool acceptClient();
+    void handleClient(int clientFd);
 };
 
 #endif
